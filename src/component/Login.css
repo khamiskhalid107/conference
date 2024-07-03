@@ -1,0 +1,51 @@
+.log {
+    color: blue;
+    text-align: center;
+}
+
+.login-container {
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid wheat;
+    border-radius: 10px rgb(8, 7, 9);
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container label {
+    margin-bottom: 3px;
+}
+
+.login-container input {
+    padding: 7px;
+    margin-bottom: 4px;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #555;
+    align-self: start;
+}
+
+input,
+select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.zcsra1{
+    
+   
+   width: 200px;
+   margin-left: 101px;
+   height: 180px;
+
+  
+}
+.register{
+    
+}
