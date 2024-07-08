@@ -27,6 +27,7 @@ const Login = () => {
       if(data.username === username && data.pasword === pasword){
         alert("Wellcome  " + username);
         localStorage.setItem("userRole", data.role);
+        localStorage.setItem("userId", data.id);
 
         if(data.role === "Admin"){
           navigate('/dashbords')
@@ -78,7 +79,7 @@ const Login = () => {
 
         <button type='submit'>login</button>
       </form>
-      <p>Dont have an account ?  <Link to="/register " className="register">Register</Link> </p>
+      <p>Dont have an account ?  <Link to="/logreg " className="register">Register</Link> </p>
     </div>
   );
 };

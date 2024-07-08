@@ -7,45 +7,33 @@ import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
 import AddVisitor from '../Visitor/Addvisitor';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Viewvisitor = () => {
+const Visitorstaff = () => {
   const [visitors, setVisitors] = useState([]);
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const [data , setData]  = useState('');
+  useEffect(() => {
+    fetchVisitors();
+  }, []);
 
-  const userId = 121;
+  const fetchVisitors = async () => {
+    try {
+      const response = await axios.get('http://localhost:4500/api/all/Visitor');
+      setVisitors(response.data);
+    } catch (error) {
+      console.error("Error fetching visitors", error);
+    }
+  };
 
-  useEffect(()=>{
-    axios.get(`http://localhost:4500/api/byId${userId}`)
-    .then((response)=>{
-      setData(response.data);
-      console.log(response.data);
-    })
-  })
-
-  // useEffect(() => {
-  //   fetchVisitors();
-  // }, []);
-
-  // const fetchVisitors = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:4500/api/byId{119}');
-  //     setVisitors(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching visitors", error);
-  //   }
-  // };
-
-//   const deleteVisitor = async (id) => {
-//     try {
-//       await axios.delete(`http://localhost:4500/api/visitor/delete${id}`);
-//       setVisitors(visitors.filter(visitor => visitor.id !== id));
-//     } catch (error) {
-//       console.error("Error deleting visitor", error);
-//     }
-//   };
+  const deleteVisitor = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4500/api/visitor/delete${id}`);
+      setVisitors(visitors.filter(visitor => visitor.id !== id));
+    } catch (error) {
+      console.error("Error deleting visitor", error);
+    }
+  };
 
   const handleUpdate = (updatedVisitor) => {
     setVisitors(visitors.map(visitor => (visitor.id === updatedVisitor.id ? updatedVisitor : visitor)));
@@ -64,40 +52,43 @@ const Viewvisitor = () => {
       <div className="d-flex">
         <div className="container mt-5">
           <h1 className="text-center mb-4">Visitor Dashboard</h1>
-
-          <h1>Full Name: {data.fullname}</h1>
-          <h1>UserName: {data.username}</h1>
-          <h1>Email: {data.email}</h1>
-          <h1>Purpose: {data.v_purpose}</h1>
-          <h1>Phone number: {data.phone}</h1>
-          <h1>Password: {data.pasword}</h1>
-          <h1>Status :</h1>
-
-
-          <button>Edit</button>
-          
-          <h1></h1>
           <table className="table table-striped table-bordered">
             <thead className="thead-dark">
               <tr>
-                
-                <th>Actions</th>
+                <th>Visitor ID</th>
+                {/* <th>Visitor Username</th> */}
+                <th>Visitor Full Name</th>
+                <th>Visitor Email</th>
+                <th>Visitor Purpose</th>
+                <th>Visitor Phone</th>
+                {/* <th>Visitor Password</th> */}
+                {/* <th>Actions</th> */}
               </tr>
             </thead>
             <tbody>
-              {/* {visitors.map(visitor => (
+              {visitors.map(visitor => (
                 <tr key={visitor.id}>
-                  
-                  <td>
+                  <td>{visitor.id}</td>
+                  {/* <td>{visitor.username}</td> */}
+                  <td>{visitor.fullname}</td>
+                  <td>{visitor.email}</td>
+                  <td>{visitor.v_purpose}</td>
+                  <td>{visitor.phone}</td>
+                  {/* <td>{visitor.pasword}</td>  */}
+                  {/* <td>
                     <FaEdit
                       className="text-warning mr-2"
                       style={{ cursor: 'pointer' }}
                       onClick={() => handleEdit(visitor)}
                     />
-                   *
-                  </td>
+                    <FaTrashAlt
+                      className="text-danger"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => deleteVisitor(visitor.id)}
+                    />
+                  </td> */}
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
           {/* <div className="text-center">
@@ -106,7 +97,7 @@ const Viewvisitor = () => {
             </Button>
           </div> */}
 
-           <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+          <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Visitor</Modal.Title>
             </Modal.Header>
@@ -120,7 +111,7 @@ const Viewvisitor = () => {
               )}
             </Modal.Body>
           </Modal>
-                  {/*
+
           <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Add Visitor</Modal.Title>
@@ -131,11 +122,11 @@ const Viewvisitor = () => {
                 setShowAddModal(false);
               }} />
             </Modal.Body>
-          </Modal> */}
+          </Modal>
         </div>
       </div>
     </>
   );
 };
 
-export default Viewvisitor;
+export default Visitorstaff;

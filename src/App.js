@@ -13,6 +13,11 @@ import AddVisitorForm from './Visitor/AddVisitorForm';
 import VisitorUpdateForm from './Visitor/VisitorUpdateForm';
 import Addvisitor from './Visitor/Addvisitor';
 import Viewvisitor from './Visitor/Viewvisitor';
+import Logregistration from './component/Logregistration';
+import Visitorstaff from './Staff/Visitorstaff';
+import Addstatus from './Staff/Addstatus';
+
+
 
 
 
@@ -22,7 +27,8 @@ function App() {
         <Routes>
       <Route path='/' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
-      {/* <Route path='n' element={<Dashboard/>}/> */}
+     <Route path='/reg' element={<Logregistration/>}/>
+    <Route path='logreg' element={<Logregistration/>}/>
 
       {/* Admin */}
 
@@ -30,10 +36,11 @@ function App() {
       <Route path='dashboard' element={<Visitordash/>}/>
       <Route path='viewvisitor' element={<Viewvisitor/>}/>
 
-
+      {/* staff */}
 
       <Route path='dashbords' element={<ReceptDash/>}/>
-      
+      <Route path='vistaff' element={<Visitorstaff/>}/>
+      <Route path='/status' element={<Addstatus/>}/>
 
       <Route path='staffdash' element={<Dashboard1/>}/>
 

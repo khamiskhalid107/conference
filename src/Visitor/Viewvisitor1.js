@@ -53,10 +53,10 @@ const Viewvisitor = () => {
     setShowEditModal(false);
   };
 
-  const handleEdit = (visitor) => {
-    setEditingVisitor(visitor);
-    setShowEditModal(true);
-  };
+  // const handleEdit = (visitor) => {
+  //   setEditingVisitor(visitor);
+  //   setShowEditModal(true);
+  // };
 
   return (
     <>
@@ -65,36 +65,45 @@ const Viewvisitor = () => {
         <div className="container mt-5">
           <h1 className="text-center mb-4">Visitor Dashboard</h1>
 
-          <h1>Full Name: {data.fullname}</h1>
-          <h1>UserName: {data.username}</h1>
-          <h1>Email: {data.email}</h1>
-          <h1>Purpose: {data.v_purpose}</h1>
-          <h1>Phone number: {data.phone}</h1>
-          <h1>Password: {data.pasword}</h1>
-          <h1>Status :</h1>
+          <h1>Name {data.username}</h1>
 
 
-          <button>Edit</button>
           
           <h1></h1>
           <table className="table table-striped table-bordered">
             <thead className="thead-dark">
               <tr>
-                
+                <th>Visitor ID</th>
+                <th>Visitor Username</th>
+                <th>Visitor Full Name</th>
+                <th>Visitor Email</th>
+                <th>Visitor Purpose</th>
+                <th>Visitor Phone</th>
+                <th>Visitor Password</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {/* {visitors.map(visitor => (
                 <tr key={visitor.id}>
-                  
+                  <td>{visitor.id}</td>
+                  <td>{visitor.username}</td>
+                  <td>{visitor.fullname}</td>
+                  <td>{visitor.email}</td>
+                  <td>{visitor.v_purpose}</td>
+                  <td>{visitor.phone}</td>
+                  <td>{visitor.pasword}</td> 
                   <td>
                     <FaEdit
                       className="text-warning mr-2"
                       style={{ cursor: 'pointer' }}
                       onClick={() => handleEdit(visitor)}
                     />
-                   *
+                    {/* <FaTrashAlt
+                      className="text-danger"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => deleteVisitor(visitor.id)}
+                    /> *
                   </td>
                 </tr>
               ))} */}
@@ -106,7 +115,7 @@ const Viewvisitor = () => {
             </Button>
           </div> */}
 
-           <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+          {/* <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Visitor</Modal.Title>
             </Modal.Header>
@@ -120,7 +129,7 @@ const Viewvisitor = () => {
               )}
             </Modal.Body>
           </Modal>
-                  {/*
+
           <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Add Visitor</Modal.Title>

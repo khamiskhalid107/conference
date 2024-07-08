@@ -5,7 +5,8 @@ const List = {
   Visitor : [
     {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Visitor Dashboard</>, path: '/viewvisitor'},
     {label: <><FontAwesomeIcon icon={faCalendarPlus} /> Add Booking</>, path: '/addbooking'},
-    {label: <><FontAwesomeIcon icon={faCogs} /> Setting</>, path: '/update password'}
+    {label: <><FontAwesomeIcon icon={faCogs} /> Setting</>, path: '/update password'},
+    {label: <><FontAwesomeIcon icon={faCogs} /> Edit Informatiom</>, path: '/update password'},
   ],
 
   Admin: [
@@ -20,7 +21,8 @@ const List = {
 
   Staff: [
     {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</>, path: '/dashboaa'},
-    {label: <><FontAwesomeIcon icon={faUserCheck} /> Add Status</>, path: '/staffdash'},
+    {label: <><FontAwesomeIcon icon={faUsers} /> All Visitor</>, path: '/vistaff'},
+    {label: <><FontAwesomeIcon icon={faUserCheck} /> Add Status</>, path: '/status'},
     {label: <><FontAwesomeIcon icon={faCogs} /> Setting</>, path: '/update password'}
   ]
 };
