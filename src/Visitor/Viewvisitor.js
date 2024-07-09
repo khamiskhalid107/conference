@@ -15,7 +15,7 @@ const Viewvisitor = () => {
 
   const [data , setData]  = useState('');
 
-  const userId = 121;
+  const userId = parseInt(localStorage.getItem('userId'));
 
   useEffect(()=>{
     axios.get(`http://localhost:4500/api/byId${userId}`)
