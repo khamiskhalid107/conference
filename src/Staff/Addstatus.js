@@ -26,6 +26,19 @@ const Addstatus = () => {
     }
   };
 
+  const toggleStatus = async (visitorId, currentStatus) => {
+    try {
+      const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
+      await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`);
+      // Update the status locally after successful request
+      setVisitors(visitors.map(visitor =>
+        visitor.id === visitorId ? { ...visitor, status: newStatus } : visitor
+      ));
+    } catch (error) {
+      console.error("Error updating status", error);
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -36,35 +49,37 @@ const Addstatus = () => {
             <thead className="thead-dark">
               <tr>
                 <th>Visitor ID</th>
-                {/* <th>Visitor Username</th> */}
                 <th>Visitor Full Name</th>
-                {/* <th>Visitor Email</th> */}
                 <th>Visitor Purpose</th>
-                <th>Add Status</th>
-                {/* <th>Visitor Phone</th> */}
-                {/* <th>Visitor Password</th> */}
-                {/* <th>Actions</th> */}
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {visitors.map(visitor => (
                 <tr key={visitor.id}>
                   <td>{visitor.id}</td>
-                  {/* <td>{visitor.username}</td> */}
                   <td>{visitor.fullname}</td>
-                  {/* <td>{visitor.email}</td> */}
                   <td>{visitor.v_purpose}</td>
+                  <td>{visitor.status}</td>
                   <td>
-                        <button style={{ backgroundColor: 'red', border: 'none', color: 'white', padding: '5px 10px', marginRight: '5px' }}>Unavailable</button>
-                        <button style={{ backgroundColor: 'yellow', border: 'none', color: 'black', padding: '5px 10px', marginRight: '5px' }}>temporary un available</button>
-                        <button style={{ backgroundColor: 'green', border: 'none', color: 'white', padding: '5px 10px' }}>available</button>
+                    <button
+                      style={{
+                        backgroundColor: visitor.status === 'available' ? 'green' : 'red',
+                        border: 'none',
+                        color: 'white',
+                        padding: '5px 10px',
+                        marginRight: '5px'
+                      }}
+                      onClick={() => toggleStatus(visitor.id, visitor.status)}
+                    >
+                      {visitor.status === 'available' ? 'Set Unavailable' : 'Set Available'}
+                    </button>
                   </td>
-                 
                 </tr>
               ))}
             </tbody>
           </table>
-        
         </div>
       </div>
     </>
