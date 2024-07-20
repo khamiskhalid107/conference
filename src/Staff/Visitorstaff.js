@@ -61,6 +61,7 @@ const Visitorstaff = () => {
                 <th>Visitor Email</th>
                 <th>Visitor Purpose</th>
                 <th>Visitor Phone</th>
+                <th>Status</th>
                 {/* <th>Visitor Password</th> */}
                 {/* <th>Actions</th> */}
               </tr>
@@ -74,6 +75,7 @@ const Visitorstaff = () => {
                   <td>{visitor.email}</td>
                   <td>{visitor.v_purpose}</td>
                   <td>{visitor.phone}</td>
+                  <td>{visitor.status}</td>
                   {/* <td>{visitor.pasword}</td>  */}
                   {/* <td>
                     <FaEdit

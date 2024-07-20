@@ -20,7 +20,11 @@ const Addstatus = () => {
   const fetchVisitors = async () => {
     try {
       const response = await axios.get('http://localhost:4500/api/all/Visitor');
-      setVisitors(response.data);
+      const visitorsWithStatus = response.data.map(visitor => ({
+        ...visitor,
+        status: visitor.status || 'pending', // Set default status to "pending"
+      }));
+      setVisitors(visitorsWithStatus);
     } catch (error) {
       console.error("Error fetching visitors", error);
     }
@@ -29,13 +33,25 @@ const Addstatus = () => {
   const toggleStatus = async (visitorId, currentStatus) => {
     try {
       const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
-      await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`);
+      await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`, { status: newStatus });
       // Update the status locally after successful request
       setVisitors(visitors.map(visitor =>
         visitor.id === visitorId ? { ...visitor, status: newStatus } : visitor
       ));
     } catch (error) {
       console.error("Error updating status", error);
+    }
+  };
+
+  const setInitialStatus = async (visitorId) => {
+    try {
+      const newStatus = 'available'; // Default to 'available' or any initial status you prefer
+      await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`, { status: newStatus });
+      setVisitors(visitors.map(visitor =>
+        visitor.id === visitorId ? { ...visitor, status: newStatus } : visitor
+      ));
+    } catch (error) {
+      console.error("Error setting initial status", error);
     }
   };
 
@@ -63,18 +79,33 @@ const Addstatus = () => {
                   <td>{visitor.v_purpose}</td>
                   <td>{visitor.status}</td>
                   <td>
-                    <button
-                      style={{
-                        backgroundColor: visitor.status === 'available' ? 'green' : 'red',
-                        border: 'none',
-                        color: 'white',
-                        padding: '5px 10px',
-                        marginRight: '5px'
-                      }}
-                      onClick={() => toggleStatus(visitor.id, visitor.status)}
-                    >
-                      {visitor.status === 'available' ? 'Set Unavailable' : 'Set Available'}
-                    </button>
+                    {visitor.status === 'pending' ? (
+                      <button
+                        style={{
+                          backgroundColor: 'blue',
+                          border: 'none',
+                          color: 'white',
+                          padding: '5px 10px',
+                          marginRight: '5px'
+                        }}
+                        onClick={() => setInitialStatus(visitor.id)}
+                      >
+                        Add Status
+                      </button>
+                    ) : (
+                      <button
+                        style={{
+                          backgroundColor: visitor.status === 'available' ? 'green' : 'red',
+                          border: 'none',
+                          color: 'white',
+                          padding: '5px 10px',
+                          marginRight: '5px'
+                        }}
+                        onClick={() => toggleStatus(visitor.id, visitor.status)}
+                      >
+                        {visitor.status === 'available' ? 'Set Unavailable' : 'Set Available'}
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
