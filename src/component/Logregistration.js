@@ -39,6 +39,7 @@ const Logregistration = () => {
       pasword: password,
       fullname: fullname,
       v_purpose: purpose,
+      status: "unavailable",
       role: "Visitor"
     };
 

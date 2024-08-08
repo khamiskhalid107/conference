@@ -16,6 +16,7 @@ import Viewvisitor from './Visitor/Viewvisitor';
 import Logregistration from './component/Logregistration';
 import Visitorstaff from './Staff/Visitorstaff';
 import Addstatus from './Staff/Addstatus';
+import Staff from './Staff/Staff';
 
 
 
@@ -41,6 +42,7 @@ function App() {
       <Route path='dashbords' element={<ReceptDash/>}/>
       <Route path='vistaff' element={<Visitorstaff/>}/>
       <Route path='/status' element={<Addstatus/>}/>
+      <Route path='/staff' element={<Staff/>}/>
 
       <Route path='staffdash' element={<Dashboard1/>}/>
 

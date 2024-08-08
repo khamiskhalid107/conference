@@ -17,6 +17,8 @@ const Register = () => {
 
   const navigate = useNavigate(); // Initialize the navigate function
 
+  const st = "unavailable"
+
   const handleSubmits = (event) => {
     event.preventDefault();
 
@@ -39,14 +41,15 @@ const Register = () => {
       pasword: password,
       fullname: fullname,
       v_purpose: purpose,
-      role: "Visitor"
+      status: st,
+      role: "Visitor",
     };
 
     axios.post('http://localhost:4500/api/add/visitor', requestData)
       .then(response => {
         console.log(response.data);
         toast.success("Visitor registered successfully, please login"); // Show success notification
-        setTimeout(() => navigate('/login'), 3000); // Redirect to login page after 3 seconds
+        // setTimeout(() => navigate('/login'), 3000); // Redirect to login page after 3 seconds
       })
       .catch(error => {
         console.error("There was an error registering the user!", error);

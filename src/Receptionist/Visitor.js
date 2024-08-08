@@ -4,14 +4,12 @@ import { Modal, Button } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Nav from '../component/Navigation/Nav';
 import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
-import AddVisitor from '../Visitor/Addvisitor';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Visitor = () => {
   const [visitors, setVisitors] = useState([]);
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     fetchVisitors();
@@ -74,7 +72,7 @@ const Visitor = () => {
                   <td>{visitor.email}</td>
                   <td>{visitor.v_purpose}</td>
                   <td>{visitor.phone}</td>
-                  <td>{visitor.pasword}</td> 
+                  <td>{visitor.pasword}</td>
                   <td>
                     <FaEdit
                       className="text-warning mr-2"
@@ -91,11 +89,6 @@ const Visitor = () => {
               ))}
             </tbody>
           </table>
-          <div className="text-center">
-            <Button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-              Add Visitor
-            </Button>
-          </div>
 
           <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
             <Modal.Header closeButton>
@@ -109,18 +102,6 @@ const Visitor = () => {
                   onCancel={() => setShowEditModal(false)}
                 />
               )}
-            </Modal.Body>
-          </Modal>
-
-          <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Visitor</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <AddVisitor onSuccess={() => {
-                fetchVisitors();
-                setShowAddModal(false);
-              }} />
             </Modal.Body>
           </Modal>
         </div>

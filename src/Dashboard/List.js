@@ -12,9 +12,10 @@ const List = {
   Admin: [
     {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Admin Dashboard</>, path: '/dashbords'},
     {label: <><FontAwesomeIcon icon={faUsers} /> All Visitor</>, path: '/visitor'},
-    {label: <><FontAwesomeIcon icon={faUserPlus} /> Add Visitor</>, path: '/addvisitor'},
-    {label: <><FontAwesomeIcon icon={faUserCheck} /> Add Status</>, path: '/status'},
-    {label: <><FontAwesomeIcon icon={faUserShield} /> Register</>, path: '/register'},
+    
+    {label: <><FontAwesomeIcon icon={faUserCheck} /> Check Status</>, path: '/status'},
+    {label: <><FontAwesomeIcon icon={faUserPlus} /> Add Staff</>, path: '/staff'},
+    {label: <><FontAwesomeIcon icon={faUserShield} /> Register</>, path: '/addvisitor'},
     {label: <><FontAwesomeIcon icon={faUserCog} /> Setting</>, path: '/update password'},
     {label: <><FontAwesomeIcon icon={faFileAlt} /> Report</>, path: '/report'}
   ],
