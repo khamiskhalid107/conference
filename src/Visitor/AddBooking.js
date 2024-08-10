@@ -1,7 +1,10 @@
-import Nav from '../component/Navigation/Nav';
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
+
 import { Button, Table, Modal } from 'react-bootstrap';
+
+import Nav from '../component/Navigation/Nav';
 
 const AddBooking = () => {
   const [staffList, setStaffList] = useState([]);
@@ -36,7 +39,7 @@ const AddBooking = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div className="main"></div>
       <div className="container">
         <h2>Staff List</h2>
