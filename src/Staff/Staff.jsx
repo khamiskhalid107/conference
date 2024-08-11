@@ -16,6 +16,7 @@ const Staff = () => {
 
   useEffect(() => {
     axios.get('http://localhost:4500/Staff/Api/all')
+    // axios.get('http://localhost:8080/Staff/Api/all')
       .then(response => {
         setStaffList(response.data);
         setLoading(false);
@@ -35,6 +36,7 @@ const Staff = () => {
   const handleDelete = (staffId) => {
     if (window.confirm('Are you sure you want to delete this staff member?')) {
       axios.delete(`http://localhost:4500/Staff/Api/delete/${staffId}`)
+      // axios.delete(`http://localhost:8080/Staff/Api/delete/${staffId}`)
         .then(() => {
           setStaffList(staffList.filter(staff => staff.id !== staffId));
           alert('Staff member deleted successfully.');
@@ -47,6 +49,7 @@ const Staff = () => {
 
   const handleUpdate = () => {
     axios.put(`http://localhost:4500/Staff/Api/update/${currentStaff.id}`, currentStaff)
+    // axios.put(`http://localhost:8080/Staff/Api/update/${currentStaff.id}`, currentStaff)
       .then(() => {
         setStaffList(staffList.map(staff => (staff.id === currentStaff.id ? currentStaff : staff)));
         setShowModal(false);
@@ -77,6 +80,7 @@ const Staff = () => {
       handleUpdate();
     } else {
       axios.post('http://localhost:4500/Staff/Api/add', currentStaff)
+      // axios.post('http://localhost:8080/Staff/Api/add', currentStaff)
         .then(response => {
           setStaffList([...staffList, response.data]);
           setShowModal(false);

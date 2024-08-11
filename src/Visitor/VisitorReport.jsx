@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
+
 import dayjs from 'dayjs';
+
 import {
   BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
+
 import Nav from '../component/Navigation/Nav';
 
 const VisitorReport = () => {
@@ -19,6 +23,7 @@ const VisitorReport = () => {
     const fetchVisitors = async () => {
       try {
         const response = await axios.get('http://localhost:4500/api/all/Visitor');
+        // const response = await axios.get('http://localhost:8080/api/all/Visitor');
         setVisitors(response.data);
         calculateVisitorStats(response.data);
       } catch (error) {

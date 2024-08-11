@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
+
 import { Modal, Button } from 'react-bootstrap';
+
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import Nav from '../component/Navigation/Nav';
-import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
-import AddVisitor from '../Visitor/Addvisitor';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import AddVisitor from '../Visitor/Addvisitor';
+import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
+import Nav from '../component/Navigation/Nav';
 
 const Viewvisitor = () => {
   const [visitors, setVisitors] = useState([]);
@@ -19,6 +24,7 @@ const Viewvisitor = () => {
 
   useEffect(()=>{
     axios.get(`http://localhost:4500/api/byId${userId}`)
+    // axios.get(`http://localhost:8080/api/byId${userId}`)
     .then((response)=>{
       setData(response.data);
       console.log(response.data);

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
+
 import { Modal, Button } from 'react-bootstrap';
+
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import Nav from '../component/Navigation/Nav';
-import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
-import AddVisitor from '../Visitor/Addvisitor';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import AddVisitor from '../Visitor/Addvisitor';
+import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
+import Nav from '../component/Navigation/Nav';
 
 const Addstatus = () => {
   const [visitors, setVisitors] = useState([]);
@@ -20,6 +25,7 @@ const Addstatus = () => {
   const fetchVisitors = async () => {
     try {
       const response = await axios.get('http://localhost:4500/api/all/Visitor');
+      // const response = await axios.get('http://localhost:8080/api/all/visitor');
       const visitorsWithStatus = response.data.map(visitor => ({
         ...visitor,
         status: visitor.status || 'pending', // Set default status to "pending"
@@ -34,6 +40,7 @@ const Addstatus = () => {
     try {
       const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
       await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`, { status: newStatus });
+      // await axios.patch(`http://localhost:8080/api/users/${visitorId}/status`, { status: newStatus });
       // Update the status locally after successful request
       setVisitors(visitors.map(visitor =>
         visitor.id === visitorId ? { ...visitor, status: newStatus } : visitor
@@ -47,6 +54,7 @@ const Addstatus = () => {
     try {
       const newStatus = 'available'; // Default to 'available' or any initial status you prefer
       await axios.patch(`http://localhost:4500/api/users/${visitorId}/status`, { status: newStatus });
+      // await axios.patch(`http://localhost:8080/api/users/${visitorId}/status`, { status: newStatus });
       setVisitors(visitors.map(visitor =>
         visitor.id === visitorId ? { ...visitor, status: newStatus } : visitor
       ));

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
-import Nav from '../component/Navigation/Nav';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Nav from '../component/Navigation/Nav';
 
 function ReceptDash() {
   const [availableCount, setAvailableCount] = useState(0);
@@ -15,6 +18,7 @@ function ReceptDash() {
   const fetchStatusCounts = async () => {
     try {
       const response = await axios.get('http://localhost:4500/api/statusCounts');
+      // const response = await axios.get('http://localhost:8080/api/statusCounts');
       setAvailableCount(response.data.available);
       setUnavailableCount(response.data.unavailable);
       setPendingCount(response.data.pending);

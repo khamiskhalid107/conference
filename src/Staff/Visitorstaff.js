@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
+
 import { Modal, Button } from 'react-bootstrap';
+
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import Nav from '../component/Navigation/Nav';
-import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
-import AddVisitor from '../Visitor/Addvisitor';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import AddVisitor from '../Visitor/Addvisitor';
+import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
+import Nav from '../component/Navigation/Nav';
 
 const Visitorstaff = () => {
   const [visitors, setVisitors] = useState([]);
@@ -20,6 +25,7 @@ const Visitorstaff = () => {
   const fetchVisitors = async () => {
     try {
       const response = await axios.get('http://localhost:4500/api/all/Visitor');
+      // const response = await axios.get('http://localhost:8080/api/all/Visitor');
       setVisitors(response.data);
     } catch (error) {
       console.error("Error fetching visitors", error);
@@ -29,6 +35,7 @@ const Visitorstaff = () => {
   const deleteVisitor = async (id) => {
     try {
       await axios.delete(`http://localhost:4500/api/visitor/delete${id}`);
+      // await axios.delete(`http://localhost:8080/api/visitor/delete${id}`);
       setVisitors(visitors.filter(visitor => visitor.id !== id));
     } catch (error) {
       console.error("Error deleting visitor", error);

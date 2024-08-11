@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import './Registration.css';
+
 import axios from 'axios';
+
 import Nav from '../component/Navigation/Nav';
+
+import './Registration.css';
 
 const AddVisitor = ({ onSuccess }) => {
   const [fullname, setFullname] = useState('');
@@ -29,6 +32,7 @@ const AddVisitor = ({ onSuccess }) => {
     };
 
     axios.post('http://localhost:4500/api/add/visitor', requestData)
+    // axios.post('http://localhost:8080/api/add/visitor', requestData)
       .then(response => {
         console.log(response.data);
         setNotification('Visitor added successfully!');
