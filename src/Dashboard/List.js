@@ -1,31 +1,31 @@
-import { faTachometerAlt, faCalendarPlus, faCogs, faUsers, faUserPlus, faUserCheck, faUserShield, faUserCog, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBook, faCog, faUsers, faUserPlus, faChartLine, faShieldAlt, faTools, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const List = {
-  Visitor : [
-    {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Visitor Dashboard</>, path: '/viewvisitor'},
-    {label: <><FontAwesomeIcon icon={faCalendarPlus} /> Add Booking</>, path: '/addbooking'},
-    {label: <><FontAwesomeIcon icon={faCogs} /> Setting</>, path: '/update password'},
-    {label: <><FontAwesomeIcon icon={faCogs} /> Edit Informatiom</>, path: '/update password'},
-    {label: <><FontAwesomeIcon icon={faCogs} /> Check Booking Status</>, path: '/checkbookStatus'}
+  Visitor: [
+    {label: <><FontAwesomeIcon icon={faHome} /> Visitor Dashboard</>, path: '/viewvisitor'},
+    {label: <><FontAwesomeIcon icon={faBook} /> Add Booking</>, path: '/addbooking'},
+    {label: <><FontAwesomeIcon icon={faTools} /> Setting</>, path: '/updatepassword'},
+    {label: <><FontAwesomeIcon icon={faTools} /> Edit Information</>, path: '/updatepassword'},
+    {label: <><FontAwesomeIcon icon={faChartLine} /> Check Booking Status</>, path: '/checkbookStatus'}
   ],
 
   Admin: [
-    {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Admin Dashboard</>, path: '/dashbords'},
-    {label: <><FontAwesomeIcon icon={faUsers} /> All Visitor</>, path: '/visitor'},
-    
-    {label: <><FontAwesomeIcon icon={faUserCheck} /> Check Status</>, path: '/status'},
+    {label: <><FontAwesomeIcon icon={faHome} /> Admin Dashboard</>, path: '/dashbords'},
+    {label: <><FontAwesomeIcon icon={faUsers} /> All Visitors</>, path: '/visitor'},
+    {label: <><FontAwesomeIcon icon={faChartLine} /> Check Status</>, path: '/status'},
     {label: <><FontAwesomeIcon icon={faUserPlus} /> Add Staff</>, path: '/staff'},
-    {label: <><FontAwesomeIcon icon={faUserShield} /> Register</>, path: '/addvisitor'},
-    {label: <><FontAwesomeIcon icon={faUserCog} /> Setting</>, path: '/update password'},
-    {label: <><FontAwesomeIcon icon={faFileAlt} /> Report</>, path: '/report'}
+    {label: <><FontAwesomeIcon icon={faShieldAlt} /> Register</>, path: '/addvisitor'},
+    {label: <><FontAwesomeIcon icon={faCog} /> Setting</>, path: '/updatepassword'},
+    {label: <><FontAwesomeIcon icon={faFileInvoice} /> Report</>, path: '/report'}
   ],
 
   Staff: [
-    {label: <><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</>, path: '/dashboaa'},
-    {label: <><FontAwesomeIcon icon={faUsers} /> All Visitor</>, path: '/vistaff'},
-    {label: <><FontAwesomeIcon icon={faUserCheck} /> Add Status</>, path: '/status'},
-    
+    {label: <><FontAwesomeIcon icon={faHome} /> Dashboard</>, path: '/dashboard'},
+    {label: <><FontAwesomeIcon icon={faUsers} /> All Visitors</>, path: '/vistaff'},
+    {label: <><FontAwesomeIcon icon={faChartLine} /> Add Status</>, path: '/status'},    
+    {label: <><FontAwesomeIcon icon={faTools} /> Add Service</>, path: '/addservice'},
+    {label: <><FontAwesomeIcon icon={faChartLine} /> View Booking</>, path: '/viewbooking'}
   ]
 };
 

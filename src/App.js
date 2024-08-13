@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import ReceptDash from './Receptionist/ReceptDash';
 import Visitor from './Receptionist/Visitor';
+import AddService from './Staff/AddService';
 import Addstatus from './Staff/Addstatus';
 import Dashboard1 from './Staff/Dashboard1';
 import Staff from './Staff/Staff';
+import Viewbooking from './Staff/Viewbooking';
 import Visitorstaff from './Staff/Visitorstaff';
 import AddBooking from './Visitor/AddBooking';
 import AddVisitorForm from './Visitor/AddVisitorForm';
@@ -45,6 +47,8 @@ function App() {
       <Route path='vistaff' element={<Visitorstaff/>}/>
       <Route path='/status' element={<Addstatus/>}/>
       <Route path='/staff' element={<Staff/>}/>
+      <Route path='/viewbooking' element={<Viewbooking/>}/>
+      <Route path='/addservice' element={<AddService/>}/>
       
 
       <Route path='staffdash' element={<Dashboard1/>}/>

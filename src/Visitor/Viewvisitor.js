@@ -2,14 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-import { Modal, Button } from 'react-bootstrap';
-
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import AddVisitor from '../Visitor/Addvisitor';
-import VisitorUpdateForm from '../Visitor/VisitorUpdateForm';
 import Nav from '../component/Navigation/Nav';
 
 const Viewvisitor = () => {
@@ -31,39 +23,6 @@ const Viewvisitor = () => {
     })
   })
 
-  // useEffect(() => {
-  //   fetchVisitors();
-  // }, []);
-
-  // const fetchVisitors = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:4500/api/byId{119}');
-  //     setVisitors(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching visitors", error);
-  //   }
-  // };
-
-//   const deleteVisitor = async (id) => {
-//     try {
-//       await axios.delete(`http://localhost:4500/api/visitor/delete${id}`);
-//       setVisitors(visitors.filter(visitor => visitor.id !== id));
-//     } catch (error) {
-//       console.error("Error deleting visitor", error);
-//     }
-//   };
-
-  const handleUpdate = (updatedVisitor) => {
-    setVisitors(visitors.map(visitor => (visitor.id === updatedVisitor.id ? updatedVisitor : visitor)));
-    setEditingVisitor(null);
-    setShowEditModal(false);
-  };
-
-  const handleEdit = (visitor) => {
-    setEditingVisitor(visitor);
-    setShowEditModal(true);
-  };
-
   return (
     <>
       <Nav />
@@ -79,65 +38,10 @@ const Viewvisitor = () => {
           {/* <h1>Password: {data.pasword}</h1> */}
           <h1>Status :{data.status}</h1>
 
-
-          <button>Edit</button>
+ 
+         
           
-          <h1></h1>
-          <table className="table table-striped table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {visitors.map(visitor => (
-                <tr key={visitor.id}>
-                  
-                  <td>
-                    <FaEdit
-                      className="text-warning mr-2"
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => handleEdit(visitor)}
-                    />
-                   *
-                  </td>
-                </tr>
-              ))} */}
-            </tbody>
-          </table>
-          {/* <div className="text-center">
-            <Button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-              Add Visitor
-            </Button>
-          </div> */}
-
-           <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Visitor</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {editingVisitor && (
-                <VisitorUpdateForm
-                  visitor={editingVisitor}
-                  onUpdate={handleUpdate}
-                  onCancel={() => setShowEditModal(false)}
-                />
-              )}
-            </Modal.Body>
-          </Modal>
-                  {/*
-          <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Visitor</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <AddVisitor onSuccess={() => {
-                fetchVisitors();
-                setShowAddModal(false);
-              }} />
-            </Modal.Body>
-          </Modal> */}
+  
         </div>
       </div>
     </>

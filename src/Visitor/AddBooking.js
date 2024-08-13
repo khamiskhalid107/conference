@@ -7,12 +7,28 @@ import { Button, Table, Modal, Form } from 'react-bootstrap';
 import Nav from '../component/Navigation/Nav';
 
 const AddBooking = () => {
+  const today = new Date().toISOString().split('T')[0];
   const [staffList, setStaffList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentStaff, setCurrentStaff] = useState(null);
-  const [bookingDetails, setBookingDetails] = useState({ date: '', time: '', notes: '' });
+
+  const [bookingDetails, setBookingDetails] = useState({
+    staffId: 10,
+    date: today,
+    time: {
+      hour: 0,
+      minute: 0,
+      second: 0,
+      nano: 0
+    },
+    notes: '',
+    status: '',
+    bookingId: 1
+  });
+
+  const visitorId = parseInt(localStorage.getItem('userId'));
 
   useEffect(() => {
     axios.get('http://localhost:4500/Staff/Api/all')
@@ -29,24 +45,33 @@ const AddBooking = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setCurrentStaff(null);
-    setBookingDetails({ date: '', time: '', notes: '' });
+    setBookingDetails({
+      staffId: 0,
+      date: today,
+      time: {
+        hour: 0,
+        minute: 0,
+        second: 0,
+        nano: 0
+      },
+      notes: '',
+      status: '',
+      bookingId: 0
+    });
   };
 
   const handleAddBooking = (staff) => {
     setCurrentStaff(staff);
+    setBookingDetails({
+      ...bookingDetails,
+      staffId: staff.id
+    });
     setShowModal(true);
   };
 
   const handleSaveBooking = () => {
     if (currentStaff) {
-      const newBooking = {
-        staffId: currentStaff.id,
-        date: bookingDetails.date,
-        time: bookingDetails.time,
-        notes: bookingDetails.notes,
-      };
-
-      axios.post('http://localhost:4500/Staff/Api/addBooking', newBooking)
+      axios.post('http://localhost:4500/Staff/Api/addBooking', bookingDetails)
         .then(response => {
           // Handle success (e.g., close modal, show success message, etc.)
           handleCloseModal();
@@ -57,6 +82,22 @@ const AddBooking = () => {
         });
     }
   };
+
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    if (currentStaff) {
+      axios.get('http://localhost:4500/api/all/Service')
+        .then(response => {
+          const staffId = currentStaff.id;
+          const staffServices = response.data.filter(service => service.staff.id === staffId);
+          setServices(staffServices);
+        })
+        .catch(error => {
+          console.error('Error fetching services:', error);
+        });
+    }
+  }, [currentStaff]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -97,7 +138,7 @@ const AddBooking = () => {
 
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Booking for {currentStaff?.fullname}</Modal.Title>
+            <Modal.Title>Add Booking for {currentStaff?.fullname} {currentStaff?.id}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -105,6 +146,7 @@ const AddBooking = () => {
                 <Form.Label>Date</Form.Label>
                 <Form.Control
                   type="date"
+                  min={today}
                   value={bookingDetails.date}
                   onChange={(e) => setBookingDetails({ ...bookingDetails, date: e.target.value })}
                 />
@@ -113,8 +155,18 @@ const AddBooking = () => {
                 <Form.Label>Time</Form.Label>
                 <Form.Control
                   type="time"
-                  value={bookingDetails.time}
-                  onChange={(e) => setBookingDetails({ ...bookingDetails, time: e.target.value })}
+                  value={`${bookingDetails.time.hour.toString().padStart(2, '0')}:${bookingDetails.time.minute.toString().padStart(2, '0')}`}
+                  onChange={(e) => {
+                    const [hour, minute] = e.target.value.split(':');
+                    setBookingDetails({
+                      ...bookingDetails,
+                      time: {
+                        ...bookingDetails.time,
+                        hour: parseInt(hour, 10),
+                        minute: parseInt(minute, 10)
+                      }
+                    });
+                  }}
                 />
               </Form.Group>
               <Form.Group controlId="formNotes">
@@ -125,6 +177,16 @@ const AddBooking = () => {
                   value={bookingDetails.notes}
                   onChange={(e) => setBookingDetails({ ...bookingDetails, notes: e.target.value })}
                 />
+              </Form.Group>
+              <Form.Group controlId="formService">
+                <Form.Label>Service</Form.Label>
+                <Form.Control as="select" value={bookingDetails.service} onChange={(e) => setBookingDetails({ ...bookingDetails, service: e.target.value })}>
+                  {services.map(service => (
+                    <option key={service.s_id} value={service.serviceName}>
+                      {service.serviceName} - {service.serviceDesc}
+                    </option>
+                  ))}
+                </Form.Control>
               </Form.Group>
             </Form>
           </Modal.Body>
