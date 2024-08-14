@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { Form, Button, Table, Container, Alert } from 'react-bootstrap';
 
+import Nav from '../component/Navigation/Nav';
+
 const AddService = () => {
   const [services, setServices] = useState([]);
   const [serviceName, setServiceName] = useState('');
@@ -11,20 +13,31 @@ const AddService = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Fetch services when the component loads
+  const userId = parseInt(localStorage.getItem('userId'));
+
+//   const userId = 4; // Replace with the correct staff ID
+
   useEffect(() => {
     axios.get('http://localhost:4500/api/all/Service')
       .then(response => {
-        setServices(response.data);
+        const filteredServices = response.data.filter(service => service.staff && service.staff.id === userId);
+        setServices(filteredServices);
       })
       .catch(() => {
         setError('Error fetching services');
       });
-  }, []);
+  }, [userId]);
+  
 
   const handleAddService = (e) => {
     e.preventDefault();
-    const newService = { serviceName, serviceDesc };
+
+    // Default staff ID set to 4
+    const newService = {
+      staff: { id: userId },  // Set the default staff ID
+      serviceName,
+      serviceDesc
+    };
 
     axios.post('http://localhost:4500/api/add/service', newService)
       .then(response => {
@@ -41,60 +54,63 @@ const AddService = () => {
   };
 
   return (
-    <Container>
-      <h2>Add New Service</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
+    <>
+      <Nav />
+      <Container>
+        <h2>Add New Service</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {success && <Alert variant="success">{success}</Alert>}
 
-      <Form onSubmit={handleAddService}>
-        <Form.Group className="mb-3">
-          <Form.Label>Service Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter service name"
-            value={serviceName}
-            onChange={(e) => setServiceName(e.target.value)}
-            required
-          />
-        </Form.Group>
+        <Form onSubmit={handleAddService}>
+          <Form.Group className="mb-3">
+            <Form.Label>Service Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter service name"
+              value={serviceName}
+              onChange={(e) => setServiceName(e.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Service Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            placeholder="Enter service description"
-            value={serviceDesc}
-            onChange={(e) => setServiceDesc(e.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Service Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Enter service description"
+              value={serviceDesc}
+              onChange={(e) => setServiceDesc(e.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Add Service
-        </Button>
-      </Form>
+          <Button variant="primary" type="submit">
+            Add Service
+          </Button>
+        </Form>
 
-      <h3 className="mt-5">Existing Services</h3>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Service Name</th>
-            <th>Service Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {services.map(service => (
-            <tr key={service.S_id}>
-              <td>{service.S_id}</td>
-              <td>{service.serviceName}</td>
-              <td>{service.serviceDesc}</td>
+        <h3 className="mt-5">Existing Services</h3>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Service Name</th>
+              <th>Service Description</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+          </thead>
+          <tbody>
+            {services.map(service => (
+              <tr key={service.S_id}>
+                <td>{service.S_id}</td>
+                <td>{service.serviceName}</td>
+                <td>{service.serviceDesc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
+    </>
   );
 };
 
