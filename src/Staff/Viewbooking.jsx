@@ -27,17 +27,19 @@ const ViewBooking = () => {
             <th>ID</th>
             <th>Staff ID</th>
             <th>Date</th>
-            <th>Time</th>
+            {/* <th>Time</th> */}
+            <th>Service name</th>
             <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map(booking => (
             <tr key={booking.id}>
+              <td>{booking.bookingId}</td>
               <td>{booking.id}</td>
-              <td>{booking.staffId}</td>
               <td>{booking.date}</td>
-              <td>{booking.time}</td>
+              {/* <td>{booking.time}</td> */}
+              <td>{booking.serviceName}</td>
               <td>{booking.notes}</td>
             </tr>
           ))}

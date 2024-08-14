@@ -24,8 +24,8 @@ const AddVisitor = ({ onSuccess }) => {
       username: username,
       email: email,
       phone: phone,
-      password: password,
-      Status: status,  
+      pasword: password,
+      Status: "unavailable",  
       fullname: fullname,
       v_purpose: purpose,
       role: "Visitor"

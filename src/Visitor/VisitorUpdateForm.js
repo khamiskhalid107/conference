@@ -69,7 +69,7 @@ const VisitorUpdateForm = ({ visitor, onUpdate, onCancel }) => {
         <Form.Group as={Row} controlId="formPassword">
           <Form.Label column sm={2}>Password</Form.Label>
           <Col sm={10}>
-            <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} />
+            <Form.Control type="password" name="password" value={formData.pasword} onChange={handleChange} />
           </Col>
         </Form.Group>
         
