@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faClock, faCalendarCheck, faUserTie } from '@fortawesome/free-solid-svg-icons';
+
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
@@ -10,11 +13,16 @@ function ReceptDash() {
   const [availableCount, setAvailableCount] = useState(0);
   const [unavailableCount, setUnavailableCount] = useState(0);
   const [pendingCount, setPendingCount] = useState(0);
-  const [bookingCount, setBookingCount] = useState(0); // New state for total bookings
+  const [bookingCount, setBookingCount] = useState(0);
+  const [staffCount, setStaffCount] = useState(0);
+  const [totalVisitors, setTotalVisitors] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchStatusCounts();
-    fetchBookingCount(); // Fetch the total bookings count
+    fetchBookingCount();
+    fetchStaffCount();
+    fetchVisitorCount();
   }, []);
 
   const fetchStatusCounts = async () => {
@@ -28,19 +36,35 @@ function ReceptDash() {
     }
   };
 
- 
   const fetchBookingCount = async () => {
     try {
-      const response = await axios.get('http://localhost:4500/api/bookingCount');
-      console.log("Booking Count Data:", response.data); // Debugging line
+      const response = await axios.get('http://localhost:4500/Staff/Api/bookingCount');
       setBookingCount(response.data);
     } catch (error) {
       console.error("Error fetching booking count", error);
+    } finally {
+      setLoading(false);
     }
   };
-  
 
-  
+  const fetchStaffCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:4500/Staff/Api/count');
+      setStaffCount(response.data);
+    } catch (error) {
+      console.error("Error fetching staff count", error);
+    }
+  };
+
+  const fetchVisitorCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:4500/api/count/visitors');
+      setTotalVisitors(response.data);
+    } catch (error) {
+      console.error('Error fetching visitor count', error);
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -49,26 +73,38 @@ function ReceptDash() {
         <div className='d-flex justify-content-around mt-4'>
           <div className='card text-center'>
             <div className='card-body'>
-              <h5 className='card-title'>Available</h5>
-              <p className='card-text'>{availableCount}</p>
+              <h5 className='card-title'>
+                <FontAwesomeIcon icon={faUsers} /> Total Visitors
+              </h5>
+              <p className='card-text'>{totalVisitors}</p>
             </div>
           </div>
           <div className='card text-center'>
             <div className='card-body'>
-              <h5 className='card-title'>Unavailable</h5>
+              <h5 className='card-title'>
+                <FontAwesomeIcon icon={faClock} /> Unavailable
+              </h5>
               <p className='card-text'>{unavailableCount}</p>
             </div>
           </div>
           <div className='card text-center'>
             <div className='card-body'>
-              <h5 className='card-title'>Pending</h5>
-              <p className='card-text'>{pendingCount}</p>
+              <h5 className='card-title'>
+                <FontAwesomeIcon icon={faCalendarCheck} /> Total Bookings
+              </h5>
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <p className='card-text'>{bookingCount}</p>
+              )}
             </div>
           </div>
           <div className='card text-center'>
             <div className='card-body'>
-              <h5 className='card-title'>Total Bookings</h5>
-              <p className='card-text'>{bookingCount}</p> {/* Display the total bookings */}
+              <h5 className='card-title'>
+                <FontAwesomeIcon icon={faUserTie} /> Total Staff
+              </h5>
+              <p className='card-text'>{staffCount}</p>
             </div>
           </div>
         </div>
