@@ -33,7 +33,7 @@ const Viewvisitor = () => {
           <h1>Full Name: {data.fullname}</h1>
           <h1>UserName: {data.username}</h1>
           <h1>Email: {data.email}</h1>
-          <h1>Purpose: {data.v_purpose}</h1>
+          {/* <h1>Purpose: {data.v_purpose}</h1> */}
           <h1>Phone number: {data.phone}</h1>
           {/* <h1>Password: {data.pasword}</h1> */}
           <h1>Status :{data.status}</h1>
