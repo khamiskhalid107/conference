@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
 import './Registration.css'; // Import react-toastify CSS
-// import Nav from '../component/Navigation/Nav'
 
 const Logregistration = () => {
   const [fullname, setFullname] = useState('');
@@ -84,7 +83,14 @@ const Logregistration = () => {
         </div>
         <div className="form-group">
           <label htmlFor="purpose">Purpose</label>
-          <input type="text" id="purpose" value={purpose} onChange={event => setPurpose(event.target.value)} />
+          <select id="purpose" value={purpose} onChange={event => setPurpose(event.target.value)}>
+            <option value="">Select Purpose</option>
+            <option value="Birth Registration">Birth Registration</option>
+            <option value="Marriage Registration">Marriage Registration</option>
+            <option value="Death Registration">Death Registration</option>
+            <option value="Change of Personal Details">Change of Personal Details</option>
+            <option value="Other Services">Other Services</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>

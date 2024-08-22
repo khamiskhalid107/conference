@@ -13,21 +13,15 @@ const AddBooking = () => {
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentStaff, setCurrentStaff] = useState(null);
-
   const [bookingDetails, setBookingDetails] = useState({
     staffId: 10,
     date: today,
-    time: {
-      hour: 0,
-      minute: 0,
-      second: 0,
-      nano: 0
-    },
+    time: { hour: 0, minute: 0, second: 0, nano: 0 },
     notes: '',
     status: '',
-    bookingId: 1
+    bookingId: 1,
   });
-
+  const [services, setServices] = useState([]);
   const visitorId = parseInt(localStorage.getItem('userId'));
 
   useEffect(() => {
@@ -36,61 +30,31 @@ const AddBooking = () => {
         setStaffList(response.data);
         setLoading(false);
       })
-      .catch(() => {
+      .catch(error => {
         setError('Error fetching staff data');
         setLoading(false);
       });
   }, []);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setCurrentStaff(null);
-    setBookingDetails({
-      staffId: 0,
-      date: today,
-      time: {
-        hour: 0,
-        minute: 0,
-        second: 0,
-        nano: 0
-      },
-      notes: '',
-      status: '',
-      bookingId: 0
-    });
-  };
-
-  const handleAddBooking = (staff) => {
-    setCurrentStaff(staff);
-    setBookingDetails({
-      ...bookingDetails,
-      staffId: staff.id
-    });
-    setShowModal(true);
-  };
-
-  const handleSaveBooking = () => {
-    if (currentStaff) {
-      axios.post('http://localhost:4500/Staff/Api/addBooking', bookingDetails)
-        .then(response => {
-          // Handle success (e.g., close modal, show success message, etc.)
-          handleCloseModal();
-        })
-        .catch(error => {
-          // Handle error (e.g., show error message)
-          console.error('There was an error saving the booking!', error);
-        });
-    }
-  };
-
-  const [services, setServices] = useState([]);
-
+  // useEffect(() => {
+  
+  //     axios.get('http://localhost:4500/api/all/Service')
+  //       .then(response => {
+  //         const staffServices = response.data.filter(service => service.staff.id === 2);
+  //         setServices(staffServices);
+  //         console.log();
+          
+  //       })
+  //       .catch(error => {
+  //         console.error('Error fetching services:', error);
+  //       });
+  //   }
+  // );
   useEffect(() => {
     if (currentStaff) {
       axios.get('http://localhost:4500/api/all/Service')
         .then(response => {
-          const staffId = currentStaff.id;
-          const staffServices = response.data.filter(service => service.staff.id === staffId);
+          const staffServices = response.data.filter(service => service.staff.id === currentStaff.id);
           setServices(staffServices);
         })
         .catch(error => {
@@ -99,13 +63,44 @@ const AddBooking = () => {
     }
   }, [currentStaff]);
 
+  const handleAddBooking = staff => {
+    setCurrentStaff(staff);
+    setBookingDetails({ ...bookingDetails, staffId: staff.id });
+    setShowModal(true);
+  };
+
+  const handleSaveBooking = () => {
+    if (currentStaff) {
+      axios.post('http://localhost:4500/Staff/Api/addBooking', bookingDetails)
+        .then(response => {
+          handleCloseModal();
+        })
+        .catch(error => {
+          console.error('There was an error saving the booking!', error);
+        });
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setCurrentStaff(null);
+    setBookingDetails({
+      staffId: 0,
+      date: today,
+      time: { hour: 0, minute: 0, second: 0, nano: 0 },
+      notes: '',
+      status: '',
+      bookingId: 0,
+    });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <>
+    <><Nav/>
       <div className="main1"></div>
-      <div className="container">
+      <div className="container" style={{ marginLeft:"200px"}}>
         <h2>Add Staff Booking</h2>
         <Table striped bordered hover>
           <thead>
@@ -137,7 +132,7 @@ const AddBooking = () => {
         </Table>
 
         <Modal show={showModal} onHide={handleCloseModal}>
-          <Modal.Header closeButton>
+        <Modal.Header closeButton>
             <Modal.Title>Add Booking for {currentStaff?.fullname} {currentStaff?.id}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -179,15 +174,15 @@ const AddBooking = () => {
                 />
               </Form.Group>
               <Form.Group controlId="formService">
-                <Form.Label>Service</Form.Label>
-                <Form.Control as="select" value={bookingDetails.service} onChange={(e) => setBookingDetails({ ...bookingDetails, service: e.target.value })}>
-                  {services.map(service => (
-                    <option key={service.s_id} value={service.serviceName}>
-                      {service.serviceName} - {service.serviceDesc}
-                    </option>
-                  ))}
-                </Form.Control>
-              </Form.Group>
+  <Form.Label>Service</Form.Label>
+  <Form.Control as="select" value={bookingDetails.service} onChange={(e) => setBookingDetails({ ...bookingDetails, service: e.target.value })}>
+    {services.map(service => (
+      <option key={service.s_id} value={service.serviceName}>
+        {service.serviceName} - {service.serviceDesc}
+      </option>
+    ))}
+  </Form.Control>
+</Form.Group>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -205,3 +200,4 @@ const AddBooking = () => {
 };
 
 export default AddBooking;
+            

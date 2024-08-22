@@ -13,7 +13,7 @@ const List = {
   Admin: [
     {label: <><FontAwesomeIcon icon={faHome} /> Admin Dashboard</>, path: '/dashbords'},
     {label: <><FontAwesomeIcon icon={faUsers} /> All Visitors</>, path: '/visitor'},
-    {label: <><FontAwesomeIcon icon={faChartLine} /> Check Status</>, path: '/status'},
+    {label: <><FontAwesomeIcon icon={faChartLine} /> Check Status</>, path: '/status1'},
     {label: <><FontAwesomeIcon icon={faUserPlus} /> Add Staff</>, path: '/staff'},
     {label: <><FontAwesomeIcon icon={faShieldAlt} /> Register</>, path: '/addvisitor'},
     {label: <><FontAwesomeIcon icon={faCog} /> Setting</>, path: '/updatepassword'},

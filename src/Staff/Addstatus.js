@@ -67,7 +67,7 @@ const Addstatus = () => {
     <>
       <Nav />
       <div className="d-flex">
-        <div className="container mt-5">
+        <div className="container mt-5" style={{ width:"1200px" , marginLeft:"300px"}} >
           <h1 className="text-center mb-4">Visitor Dashboard</h1>
           <table className="table table-striped table-bordered">
             <thead className="thead-dark">

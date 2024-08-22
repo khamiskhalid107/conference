@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
+import Nav from '../component/Navigation/Nav';
+
 function StaffList({ onClose }) {
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,14 +25,15 @@ function StaffList({ onClose }) {
   }, []);
 
   return (
+    <><Nav />
     <div className="modal" style={{ display: 'block' }}>
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Staff List</h5>
             {/* <button type="button" className="close" onClick={onClose}>
-              <span aria-hidden="true">&times;</span>
-            </button> */}
+      <span aria-hidden="true">&times;</span>
+    </button> */}
           </div>
           <div className="modal-body">
             {loading ? (
@@ -69,7 +72,7 @@ function StaffList({ onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 }
 

@@ -42,7 +42,7 @@ const Login = () => {
         }
 
         if(data.role === "Visitor"){
-          navigate('/visitor');
+          navigate('/viewvisitor');
         }
       }else{
         alert("Try again");

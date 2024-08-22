@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Nav from '../component/Navigation/Nav';
+
 const ViewBooking = () => {
   const [bookings, setBookings] = useState([]);
 
@@ -19,7 +21,9 @@ const ViewBooking = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
+
+    <><Nav />
+    <div className="container mt-5"  style={{backgroundColor:"blue" , width:"1100px" , marginLeft:"300px"}}>
       <h2 className="text-black">Bookings</h2>
       <table className="table table-bordered">
         <thead className="thead-dark">
@@ -45,7 +49,7 @@ const ViewBooking = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </div></>
   );
 }
 

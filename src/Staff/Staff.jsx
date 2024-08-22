@@ -6,6 +6,8 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import { Modal, Button, Table } from 'react-bootstrap';
 
+import Nav from '../component/Navigation/Nav';
+
 const Staff = () => {
   const [staffList, setStaffList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +103,7 @@ const Staff = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="container">
+    <><Nav /><div className="container"  style={{backgroundColor:"red" , width:"66%" , marginLeft:"25%" }}>
       <h2>Staff List</h2>
       <Table striped bordered hover>
         <thead>
@@ -159,8 +161,7 @@ const Staff = () => {
                   type="text"
                   className="form-control"
                   value={currentStaff.fullname}
-                  onChange={(e) => setCurrentStaff({ ...currentStaff, fullname: e.target.value })}
-                />
+                  onChange={(e) => setCurrentStaff({ ...currentStaff, fullname: e.target.value })} />
               </div>
               <div className="form-group">
                 <label>Username</label>
@@ -168,8 +169,7 @@ const Staff = () => {
                   type="text"
                   className="form-control"
                   value={currentStaff.username}
-                  onChange={(e) => setCurrentStaff({ ...currentStaff, username: e.target.value })}
-                />
+                  onChange={(e) => setCurrentStaff({ ...currentStaff, username: e.target.value })} />
               </div>
               <div className="form-group">
                 <label>Password</label>
@@ -177,8 +177,7 @@ const Staff = () => {
                   type="password"
                   className="form-control"
                   value={currentStaff.pasword}
-                  onChange={(e) => setCurrentStaff({ ...currentStaff, pasword: e.target.value })}
-                />
+                  onChange={(e) => setCurrentStaff({ ...currentStaff, pasword: e.target.value })} />
               </div>
               <div className="form-group">
                 <label>Role</label>
@@ -186,8 +185,7 @@ const Staff = () => {
                   type="text"
                   className="form-control"
                   value={currentStaff.role}
-                  readOnly
-                />
+                  readOnly />
               </div>
               <div className="form-group">
                 <label>Staff Number</label>
@@ -195,8 +193,7 @@ const Staff = () => {
                   type="text"
                   className="form-control"
                   value={currentStaff.staffNo}
-                  onChange={(e) => setCurrentStaff({ ...currentStaff, staffNo: e.target.value })}
-                />
+                  onChange={(e) => setCurrentStaff({ ...currentStaff, staffNo: e.target.value })} />
               </div>
               <div className="form-group">
                 <label>Service</label>
@@ -204,8 +201,7 @@ const Staff = () => {
                   type="text"
                   className="form-control"
                   value={currentStaff.staffService}
-                  onChange={(e) => setCurrentStaff({ ...currentStaff, staffService: e.target.value })}
-                />
+                  onChange={(e) => setCurrentStaff({ ...currentStaff, staffService: e.target.value })} />
               </div>
               <div className="form-group">
                 <label>Location</label>
@@ -233,7 +229,7 @@ const Staff = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div></>
   );
 };
 

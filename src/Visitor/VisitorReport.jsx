@@ -61,7 +61,7 @@ const VisitorReport = () => {
   return (
     <>
       <Nav />
-      <div className="container mt-5">
+      <div className="container mt-5" style={{backgroundColor:"blue",marginLeft:"19%"}}>
         <h1 className="text-center mb-4">Visitor Report</h1>
 
         <div className="mb-4">
@@ -120,9 +120,9 @@ const VisitorReport = () => {
             <tr>
               <th>Visitor ID</th>
               <th>Visitor Username</th>
-              <th>Visitor Full Name</th>
-              <th>Visitor Email</th>
-              <th>Visitor Purpose</th>
+              {/* <th>Visitor Full Name</th> */}
+              {/* <th>Visitor Email</th> */}
+              {/* <th>Visitor Purpose</th> */}
               <th>Visitor Phone</th>
             </tr>
           </thead>
@@ -131,9 +131,9 @@ const VisitorReport = () => {
               <tr key={visitor.id}>
                 <td>{visitor.id}</td>
                 <td>{visitor.username}</td>
-                <td>{visitor.fullname}</td>
-                <td>{visitor.email}</td>
-                <td>{visitor.v_purpose}</td>
+                {/* <td>{visitor.fullname}</td> */}
+                {/* <td>{visitor.email}</td> */}
+                {/* <td>{visitor.v_purpose}</td> */}
                 <td>{visitor.phone}</td>
               </tr>
             ))}

@@ -98,9 +98,9 @@ function ReceptDash() {
   return (
     <>
       <Nav />
-      <div className='main1'>
+      <div className='main' >
         <h2>Admin Dashboard</h2>
-        <div className='d-flex justify-content-around mt-4'>
+        <div className='d-flex justify-content-around mt-4' >
           <div className='card text-center' style={{ backgroundColor: '#d1e7dd', color: '#0f5132' }} onClick={handleShowVisitorList}>
             <div className='card-body'>
               <h5 className='card-title'>

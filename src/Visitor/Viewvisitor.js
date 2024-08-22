@@ -27,7 +27,7 @@ const Viewvisitor = () => {
     <>
       <Nav />
       <div className="d-flex">
-        <div className="container mt-5">
+        <div className="container mt-5" style={{ marginLeft:"250px"}}>
           <h1 className="text-center mb-4">Visitor Dashboard</h1>
 
           <h1>Full Name: {data.fullname}</h1>
