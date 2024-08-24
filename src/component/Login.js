@@ -49,7 +49,7 @@ const Login = () => {
         }
 
         if(data.role === "Staff"){
-          navigate('/staffdash');
+          navigate('/dashboard');
         }
 
         if(data.role === "Visitor"){

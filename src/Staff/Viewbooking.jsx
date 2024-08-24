@@ -48,7 +48,7 @@ const ViewBooking = () => {
   return (
     <>
       <Nav />
-      <div className="container mt-5" style={{ backgroundColor: "blue", width: "1100px", marginLeft: "300px" }}>
+      <div className="container mt-5" style={{  width: "1100px", marginLeft: "300px" ,marginTop:"444%"}}>
         <h2 className="text-black">Bookings</h2>
         <table className="table table-bordered">
           <thead className="thead-dark">
