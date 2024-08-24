@@ -39,7 +39,7 @@ const BookingList = ({ onClose }) => {
             {bookings.map((booking) => (
               <tr key={booking.id}>
                 {/* <td>{booking.id}</td> */}
-                <td>{booking.customerName}</td>
+                <td>{booking.visitor?.username}</td>
                 <td>{booking.date}</td>
                 <td>{booking.status}</td>
               </tr>

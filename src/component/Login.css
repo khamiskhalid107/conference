@@ -1,5 +1,5 @@
 .log {
-    color: blue;
+    color: rgb(16, 16, 188);
     text-align: center;
 }
 
@@ -13,6 +13,8 @@
     background-color: aquamarine;
     display: flex;
     flex-direction: column;
+    border-radius: 44px;
+    margin-top: 33px;
 }
 
 .login-container label {
@@ -41,7 +43,7 @@ select {
     
    
    width: 200px;
-   margin-left: 101px;
+   margin-left: 80px;
    height: 180px;
 
   

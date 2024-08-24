@@ -11,6 +11,7 @@ import Viewbooking from './Staff/Viewbooking';
 import Visitorstaff from './Staff/Visitorstaff';
 import AddBooking from './Visitor/AddBooking';
 import AddVisitorForm from './Visitor/AddVisitorForm';
+import Addbook from './Visitor/Addbook';
 import Addvisitor from './Visitor/Addvisitor';
 import CheckBookingStatus from './Visitor/CheckBookingStatus';
 import Viewvisitor from './Visitor/Viewvisitor';
@@ -70,8 +71,8 @@ function App() {
       
       <Route path='checkbookStatus' element={<CheckBookingStatus/>}/>
       <Route path='viewvisitor' element={<Viewvisitor/>}/>
+      {/* <Route path='/addbooking' element={<Addbook/>}/> */}
       <Route path='/addbooking' element={<AddBooking/>}/>
-
       </Route>
       </Routes>
    

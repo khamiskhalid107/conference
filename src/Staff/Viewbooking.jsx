@@ -10,8 +10,7 @@ const ViewBooking = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    // Fetch bookings from the Spring Boot backend
-    axios.get('http://localhost:4500/Staff/Api/allBookings')
+    axios.get('http://localhost:4500/API/Booking1/allBooking1')
       .then(response => {
         setBookings(response.data);
       })
@@ -20,36 +19,84 @@ const ViewBooking = () => {
       });
   }, []);
 
-  return (
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:4500/API/Booking1/deleteBooking1/${id}`)
+      .then(() => {
+        setBookings(bookings.filter(booking => booking.bookingId !== id));
+      })
+      .catch(error => {
+        console.error("There was an error deleting the booking!", error);
+      });
+  };
 
-    <><Nav />
-    <div className="container mt-5"  style={{backgroundColor:"blue" , width:"1100px" , marginLeft:"300px"}}>
-      <h2 className="text-black">Bookings</h2>
-      <table className="table table-bordered">
-        <thead className="thead-dark">
-          <tr>
-            <th>ID</th>
-            <th>Staff ID</th>
-            <th>Date</th>
-            {/* <th>Time</th> */}
-            <th>Service name</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map(booking => (
-            <tr key={booking.id}>
-              <td>{booking.bookingId}</td>
-              <td>{booking.id}</td>
-              <td>{booking.date}</td>
-              {/* <td>{booking.time}</td> */}
-              <td>{booking.serviceName}</td>
-              <td>{booking.notes}</td>
+  const handleUpdateStatus = (id, status) => {
+    axios.put(`http://localhost:4500/API/Booking1/updateBookingStatus/${id}`, status, {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    })
+    .then(response => {
+      setBookings(bookings.map(booking =>
+        booking.bookingId === id ? response.data : booking
+      ));
+    })
+    .catch(error => {
+      console.error("There was an error updating the booking status!", error);
+    });
+  };
+
+  return (
+    <>
+      <Nav />
+      <div className="container mt-5" style={{ backgroundColor: "blue", width: "1100px", marginLeft: "300px" }}>
+        <h2 className="text-black">Bookings</h2>
+        <table className="table table-bordered">
+          <thead className="thead-dark">
+            <tr>
+              <th>Booking ID</th>
+              <th>Staff ID</th>
+              <th>Date</th>
+              <th>Service Name</th>
+              <th>Notes</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div></>
+          </thead>
+          <tbody>
+            {bookings.map(booking => (
+              <tr key={booking.bookingId}>
+                <td>{booking.bookingId}</td>
+                <td>{booking.staffId}</td>
+                <td>{booking.date}</td>
+                <td>{booking.service}</td>
+                <td>{booking.notes}</td>
+                <td>{booking.status}</td>
+                <td>
+                  <button 
+                    className="btn btn-success"
+                    onClick={() => handleUpdateStatus(booking.bookingId, "Accepted")}
+                  >
+                    Accept
+                  </button>
+                  <button 
+                    className="btn btn-danger"
+                    onClick={() => handleUpdateStatus(booking.bookingId, "Rejected")}
+                  >
+                    Reject
+                  </button>
+                  <button 
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(booking.bookingId)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 

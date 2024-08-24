@@ -25,7 +25,7 @@ function StaffList({ onClose }) {
   }, []);
 
   return (
-    <><Nav />
+    <>
     <div className="modal" style={{ display: 'block' }}>
       <div className="modal-dialog">
         <div className="modal-content">
