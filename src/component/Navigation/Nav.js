@@ -1,29 +1,35 @@
-import React from 'react'
-import links from '../../Dashboard/List'
-import { Link, NavLink } from 'react-router-dom'
-import Header from './Header'
+import React from 'react';
 
-const Nav = ({userRole = localStorage.getItem('userRole')}) => {
+import { Link, NavLink } from 'react-router-dom';
+
+import { FaSignOutAlt } from 'react-icons/fa'; 
+
+import links from '../../Dashboard/List';
+
+import Header from './Header';// Importing the logout icon from react-icons
+
+const Nav = ({ userRole = localStorage.getItem('userRole') }) => {
   return (
-      <><Header />
+    <>
+      <Header />
       <div className='navigation'>
-          <ul>
-
-              {links[userRole].map((link, index) => (
-                  <li key={index}>
-                      <Link to={link.path}>
-                          {link.label}
-                      </Link>
-                  </li>
-              ))}
-
-          </ul>
-          <NavLink to='/'>log out</NavLink>
+        <ul>
+          {links[userRole].map((link, index) => (
+            <li key={index}>
+              <Link to={link.path}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {/* Adding the logout icon next to the logout text */}
+        <NavLink to='/'>
+          <FaSignOutAlt style={{ marginRight: '8px' }} /> {/* Icon with a little space to the right */}
+          Log out
+        </NavLink>
       </div>
-   
-      </>
+    </>
+  );
+};
 
-  )
-}
-
-export default Nav
+export default Nav;
