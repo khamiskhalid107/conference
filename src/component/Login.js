@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -12,6 +12,17 @@ const Login = () => {
   const[pasword, setPasword] = useState('');
   const[error, setError] = useState('');
   const navigate = useNavigate();
+
+
+  const location = useLocation();
+  
+  useEffect(() => {
+    if(location.pathname === '/') {
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userRole');
+    }
+  },[location]
+);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

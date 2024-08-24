@@ -1,6 +1,6 @@
 import React from 'react'
 import links from '../../Dashboard/List'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Header from './Header'
 
 const Nav = ({userRole = localStorage.getItem('userRole')}) => {
@@ -18,8 +18,11 @@ const Nav = ({userRole = localStorage.getItem('userRole')}) => {
               ))}
 
           </ul>
+          <NavLink to='/'>log out</NavLink>
+      </div>
+   
+      </>
 
-      </div></>
   )
 }
 
